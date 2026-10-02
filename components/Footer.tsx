@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function Footer(){return <footer><div className="container footer-inner"><div><strong>DONNAH ARTS</strong><p>Figurative & contemporary visual art · Kampala, Uganda</p></div><div className="footer-links"><Link href="/gallery">Gallery</Link><Link href="/commissions">Commissions</Link><Link href="/contact">Contact</Link></div><small>© {new Date().getFullYear()} Donnah Arts</small></div></footer>}

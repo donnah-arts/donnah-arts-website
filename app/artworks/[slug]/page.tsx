@@ -1,0 +1,6 @@
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import ArtworkVisual from '@/components/ArtworkVisual';
+import { artworks, getArtwork } from '@/data/artworks';
+export function generateStaticParams(){return artworks.map(a=>({slug:a.slug}));}
+export default async function ArtworkPage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const artwork=getArtwork(slug);if(!artwork)notFound();return <main className="artwork-page page"><div className="container artwork-detail"><ArtworkVisual title={artwork.title} image={artwork.image} variant="p0" className="art-detail-image"/><div className="art-detail-copy"><p className="eyebrow">{artwork.category}</p><h1>{artwork.title}</h1><p className="lead">{artwork.description}</p><div className="detail-list"><div><small>YEAR</small><strong>{artwork.year}</strong></div><div><small>MEDIUM</small><strong>{artwork.medium}</strong></div><div><small>STATUS</small><strong>{artwork.status}</strong></div></div><Link className="button button-dark" href={`/commissions?artwork=${encodeURIComponent(artwork.title)}`}>Inquire about this work</Link><Link className="text-link back-link" href="/gallery">← Back to gallery</Link></div></div></main>}
